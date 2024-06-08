@@ -1,0 +1,69 @@
+[gd_resource type="Resource" script_class="Analog2D" load_steps=10 format=3 uid="uid://c00et1kwumk7v"]
+
+[ext_resource type="Script" path="res://scripts/controller_classes/analog/analog2d.gd" id="1_wt25n"]
+[ext_resource type="Script" path="res://scripts/controller_classes/analog/analog.gd" id="2_ioksn"]
+[ext_resource type="Script" path="res://scripts/controller_classes/analog/analog1d.gd" id="3_yqe5x"]
+
+[sub_resource type="Resource" id="Resource_w4xn8"]
+script = ExtResource("2_ioksn")
+thresholds = Array[Resource("res://scripts/controller_classes/threshold/threshold_abs.gd")]([])
+deadzone_in = 0.0
+deadzone_out = 1.0
+action = &"cam_right"
+active = 1
+
+[sub_resource type="Resource" id="Resource_dic02"]
+script = ExtResource("2_ioksn")
+thresholds = Array[Resource("res://scripts/controller_classes/threshold/threshold_abs.gd")]([])
+deadzone_in = 0.0
+deadzone_out = 1.0
+action = &"cam_left"
+active = 1
+
+[sub_resource type="Resource" id="Resource_dubb7"]
+script = ExtResource("3_yqe5x")
+positive = SubResource("Resource_dic02")
+negative = SubResource("Resource_w4xn8")
+thresholds = Array[Resource("res://scripts/controller_classes/threshold/threshold_abs.gd")]([])
+settings = 0
+deadzone_in = 0.0
+deadzone_out = 1.0
+name = &"horizontal"
+active = 1
+
+[sub_resource type="Resource" id="Resource_bbjsm"]
+script = ExtResource("2_ioksn")
+thresholds = Array[Resource("res://scripts/controller_classes/threshold/threshold_abs.gd")]([])
+deadzone_in = 0.0
+deadzone_out = 1.0
+action = &"cam_down"
+active = 1
+
+[sub_resource type="Resource" id="Resource_764n7"]
+script = ExtResource("2_ioksn")
+thresholds = Array[Resource("res://scripts/controller_classes/threshold/threshold_abs.gd")]([])
+deadzone_in = 0.0
+deadzone_out = 1.0
+action = &"cam_up"
+active = 1
+
+[sub_resource type="Resource" id="Resource_ry72i"]
+script = ExtResource("3_yqe5x")
+positive = SubResource("Resource_764n7")
+negative = SubResource("Resource_bbjsm")
+thresholds = Array[Resource("res://scripts/controller_classes/threshold/threshold_abs.gd")]([])
+settings = 0
+deadzone_in = 0.0
+deadzone_out = 1.0
+name = &"vertical"
+active = 1
+
+[resource]
+script = ExtResource("1_wt25n")
+xAxis = SubResource("Resource_dubb7")
+yAxis = SubResource("Resource_ry72i")
+thresholds = Array[Resource("res://scripts/controller_classes/threshold/threshold_abs.gd")]([])
+deadzone_in = 0.0
+deadzone_out = 1.0
+name = &"camera"
+active = 1

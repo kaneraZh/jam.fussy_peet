@@ -1,0 +1,80 @@
+[gd_resource type="Resource" script_class="Analog2D" load_steps=13 format=3 uid="uid://c56itjfarbvij"]
+
+[ext_resource type="Script" path="res://scripts/controller_classes/analog/analog2d.gd" id="1_21bwh"]
+[ext_resource type="Script" path="res://scripts/controller_classes/analog/analog.gd" id="2_cpmuw"]
+[ext_resource type="Script" path="res://scripts/controller_classes/threshold/threshold_abs.gd" id="2_hd3dm"]
+[ext_resource type="Script" path="res://scripts/controller_classes/analog/analog1d.gd" id="3_qs643"]
+
+[sub_resource type="Resource" id="Resource_4jy18"]
+script = ExtResource("2_hd3dm")
+value = 0.3
+settings = 3
+
+[sub_resource type="Resource" id="Resource_j0531"]
+script = ExtResource("2_hd3dm")
+value = 0.1
+settings = 5
+
+[sub_resource type="Resource" id="Resource_7sax8"]
+script = ExtResource("2_cpmuw")
+thresholds = Array[ExtResource("2_hd3dm")]([])
+deadzone_in = 0.0
+deadzone_out = 1.0
+action = &"ui_right"
+active = 1
+
+[sub_resource type="Resource" id="Resource_yroqr"]
+script = ExtResource("2_cpmuw")
+thresholds = Array[ExtResource("2_hd3dm")]([])
+deadzone_in = 0.0
+deadzone_out = 1.0
+action = &"ui_left"
+active = 1
+
+[sub_resource type="Resource" id="Resource_u38eg"]
+script = ExtResource("3_qs643")
+positive = SubResource("Resource_yroqr")
+negative = SubResource("Resource_7sax8")
+thresholds = Array[ExtResource("2_hd3dm")]([])
+settings = 0
+deadzone_in = 0.0
+deadzone_out = 1.0
+name = &"horizontal"
+active = 1
+
+[sub_resource type="Resource" id="Resource_5o8v3"]
+script = ExtResource("2_cpmuw")
+thresholds = Array[ExtResource("2_hd3dm")]([])
+deadzone_in = 0.0
+deadzone_out = 1.0
+action = &"ui_down"
+active = 1
+
+[sub_resource type="Resource" id="Resource_3v00a"]
+script = ExtResource("2_cpmuw")
+thresholds = Array[ExtResource("2_hd3dm")]([])
+deadzone_in = 0.0
+deadzone_out = 1.0
+action = &"ui_up"
+active = 1
+
+[sub_resource type="Resource" id="Resource_lyah2"]
+script = ExtResource("3_qs643")
+positive = SubResource("Resource_3v00a")
+negative = SubResource("Resource_5o8v3")
+thresholds = Array[ExtResource("2_hd3dm")]([])
+settings = 0
+deadzone_in = 0.0
+deadzone_out = 1.0
+name = &"vertical"
+active = 1
+
+[resource]
+script = ExtResource("1_21bwh")
+xAxis = SubResource("Resource_u38eg")
+yAxis = SubResource("Resource_lyah2")
+thresholds = Array[ExtResource("2_hd3dm")]([SubResource("Resource_4jy18"), SubResource("Resource_j0531")])
+deadzone_in = 0.0
+deadzone_out = 1.0
+name = &"movement"
+active = 1

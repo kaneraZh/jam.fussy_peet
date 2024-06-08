@@ -1,3 +1,6 @@
+.godot/
+**/*.tmp
+
 # Godot-specific ignores
 .import/
 export.cfg

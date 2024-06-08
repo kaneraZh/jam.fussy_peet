@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Binary" load_steps=2 format=3 uid="uid://ccq7wg5c2wksj"]
+
+[ext_resource type="Script" path="res://scripts/controller_classes/binary/binary.gd" id="1_33q7q"]
+
+[resource]
+script = ExtResource("1_33q7q")
+signals = 1
+action = &"ui_accept"
+active = 1

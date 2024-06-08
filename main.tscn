@@ -1,0 +1,177 @@
+[gd_scene load_steps=11 format=3 uid="uid://bm3bkv50q2b0r"]
+
+[ext_resource type="Script" path="res://scripts/characters/player_scene.gd" id="1_fu5cy"]
+[ext_resource type="Script" path="res://scripts/gravity_area.gd" id="3_kkvdr"]
+[ext_resource type="Script" path="res://scripts/character.gd" id="8_6u6nt"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tsrvl"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_aag2r"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aiu3b"]
+size = Vector3(20, 6, 20)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_b54np"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8usku"]
+size = Vector3(20, 2, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0gjel"]
+albedo_color = Color(0.301961, 0.301961, 0.301961, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gxoww"]
+size = Vector2(20, 20)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 8.64208, 0)
+light_energy = 16.0
+light_volumetric_fog_energy = 16.0
+light_specular = 5.892
+spot_range = 14.2976
+
+[node name="player" type="Node3D" parent="."]
+script = ExtResource("1_fu5cy")
+
+[node name="Camera3D" type="Camera3D" parent="player"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 6, 8)
+
+[node name="CharacterBody3D2" type="CharacterBody3D" parent="player" node_paths=PackedStringArray("relative")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
+rotation_edit_mode = 2
+script = ExtResource("8_6u6nt")
+relative = NodePath("../Camera3D")
+SPEED = 10.0
+relative_position = Vector3(0, 3, 5)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="player/CharacterBody3D2"]
+shape = SubResource("SphereShape3D_tsrvl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="player/CharacterBody3D2"]
+mesh = SubResource("SphereMesh_aag2r")
+
+[node name="Node" type="Node3D" parent="."]
+
+[node name="Area3D" type="Area3D" parent="Node"]
+rotation_edit_mode = 2
+gravity_space_override = 3
+script = ExtResource("3_kkvdr")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+shape = SubResource("BoxShape3D_aiu3b")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node"]
+physics_material_override = SubResource("PhysicsMaterial_b54np")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_8usku")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node/StaticBody3D"]
+material_override = SubResource("StandardMaterial3D_0gjel")
+mesh = SubResource("PlaneMesh_gxoww")
+
+[node name="Area3D2" type="Area3D" parent="Node"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 16.0287, 8, 0)
+rotation_edit_mode = 2
+gravity_space_override = 3
+script = ExtResource("3_kkvdr")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+shape = SubResource("BoxShape3D_aiu3b")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Node"]
+transform = Transform3D(7.10543e-15, -1, 0, 1, 7.10543e-15, 0, 0, 0, 1, 16.0287, 8, 0)
+rotation_edit_mode = 2
+physics_material_override = SubResource("PhysicsMaterial_b54np")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_8usku")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node/StaticBody3D2"]
+material_override = SubResource("StandardMaterial3D_0gjel")
+mesh = SubResource("PlaneMesh_gxoww")
+
+[node name="Area3D3" type="Area3D" parent="Node"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -15.9713, 8, 0)
+rotation_edit_mode = 2
+gravity_space_override = 3
+script = ExtResource("3_kkvdr")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/Area3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+shape = SubResource("BoxShape3D_aiu3b")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="Node"]
+transform = Transform3D(-7.10543e-15, 1, 8.74228e-08, 1, 7.10543e-15, 0, -6.21176e-22, 8.74228e-08, -1, -15.9713, 8, 0)
+rotation_edit_mode = 2
+physics_material_override = SubResource("PhysicsMaterial_b54np")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/StaticBody3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_8usku")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node/StaticBody3D3"]
+material_override = SubResource("StandardMaterial3D_0gjel")
+mesh = SubResource("PlaneMesh_gxoww")
+
+[node name="Area3D4" type="Area3D" parent="Node"]
+transform = Transform3D(-3.10588e-22, 4.37114e-08, 1, 1, 7.10543e-15, 0, -7.10543e-15, 1, -4.37114e-08, 0.028661, 8, -16)
+rotation_edit_mode = 2
+gravity_space_override = 3
+script = ExtResource("3_kkvdr")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/Area3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+shape = SubResource("BoxShape3D_aiu3b")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="Node"]
+transform = Transform3D(-3.10588e-22, 4.37114e-08, 1, 1, 7.10543e-15, 0, -7.10543e-15, 1, -4.37114e-08, 0.028661, 8, -16)
+rotation_edit_mode = 2
+physics_material_override = SubResource("PhysicsMaterial_b54np")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/StaticBody3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_8usku")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node/StaticBody3D4"]
+material_override = SubResource("StandardMaterial3D_0gjel")
+mesh = SubResource("PlaneMesh_gxoww")
+
+[node name="Area3D5" type="Area3D" parent="Node"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.0286624, 8, 16)
+rotation_edit_mode = 2
+gravity_space_override = 3
+script = ExtResource("3_kkvdr")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/Area3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+shape = SubResource("BoxShape3D_aiu3b")
+
+[node name="StaticBody3D5" type="StaticBody3D" parent="Node"]
+transform = Transform3D(-3.10588e-22, 4.37114e-08, -1, 1, 7.10543e-15, 0, 7.10543e-15, -1, -4.37114e-08, 0.0286624, 8, 16)
+rotation_edit_mode = 2
+physics_material_override = SubResource("PhysicsMaterial_b54np")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/StaticBody3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_8usku")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node/StaticBody3D5"]
+material_override = SubResource("StandardMaterial3D_0gjel")
+mesh = SubResource("PlaneMesh_gxoww")
