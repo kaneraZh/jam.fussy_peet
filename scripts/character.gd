@@ -33,9 +33,6 @@ func get_input_mov()->Vector2:
 		Input.get_action_strength(INPUT_MOV_B)-Input.get_action_strength(INPUT_MOV_F)
 	)
 
-func _ready():
-	assert(relative!=null, 'relative is null :(')
-
 @export var relative_closest:float
 @export var relative_furthest:float
 @export var relative_position:Vector3
@@ -54,3 +51,14 @@ func _physics_process(delta):
 	velocity+= gravity_normal
 	move_and_slide()
 	relative.position = get_relative_basis() * relative_position+get_position()
+
+var floor_main:Node3D
+var floor_candidates:Array[Node3D]
+
+
+func _ready():
+	assert(relative!=null, 'relative is null :(')
+	$Area3D.connect(&"body_entered", func(body:Node3D):
+		if( body.is_in_group(&"floor") ):
+			floor_candidates.append(body)
+	)

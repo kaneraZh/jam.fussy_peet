@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvn4b0mststhf"]
+
+[ext_resource type="PackedScene" uid="uid://blwlx0l3tn8w7" path="res://models/weird_shape.glb" id="1_qxrur"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_iu8gb"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cgiyx"]
+points = PackedVector3Array(0, 0, 0)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.915347, 0.402667, 0, -0.402667, 0.915347, -2.38419e-07, 4.74954, 3.61131)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.136515, 3.8954, -4.76837e-07)
+shape = SubResource("SphereShape3D_iu8gb")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.705055, 0.596806, -0.38304, 0, 0.540137, 0.841577, 0.709152, -0.593358, 0.380827, 0, 4.6947, -4.07963)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_cgiyx")
+
+[node name="weird_shape" parent="." instance=ExtResource("1_qxrur")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
